@@ -9,11 +9,24 @@ jobs:
           name: IP Address
           command: |
               hostname -i
+              
+  Checking_Firewall:
+    docker:
+      - image: cimg/python:3.11.3
+    steps:
+      - checkout
+      - run: 
+          name: Systemctl
+          command: |
+              systemctl status firewalld.service
             
 
 workflows:
   Getting_IP:
     jobs:
       - Checking_IP_Address
+      - Checking_Firewall:
+          requires:
+            - Checking_IP_Address
 
       
