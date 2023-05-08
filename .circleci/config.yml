@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+  Checking_IP_Address:
+    docker:
+      - image: cimg/python:3.11.3
+    steps:
+      - checkout
+      - run:
+        name: IP Address
+        command: |
+          hostname -i
+            
+
+workflows:
+  Getting_IP:
+    jobs:
+      - Checking_IP_Address
+
+      
